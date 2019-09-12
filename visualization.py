@@ -3,13 +3,10 @@ import csv
 import numpy as np
 import math
 
+def plot(image, csvfile):
+    imageHeight = np.size(image, 0)
+    overlay = image.copy()
 
-image = cv2.imread('data/train_images/0002cc93b.jpg')
-imageHeight = np.size(image, 0)
-imageWidth = np.size(image, 1)
-overlay = image.copy()
-
-with open('data/train.csv') as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
     next(reader, None)  # skip the headers
     for row in reader:
@@ -23,8 +20,6 @@ with open('data/train.csv') as csvfile:
         #print(row)
         break
 
-alpha = 0.1
-image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
-cv2.imshow('image', image_new)
-
-cv2.waitKey(0)
+    alpha = 0.1
+    image_new = cv2.addWeighted(overlay, alpha, image, 1 - alpha, 0)
+    cv2.imshow('image', image_new)
